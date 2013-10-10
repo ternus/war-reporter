@@ -34,4 +34,6 @@ class PanopticNfqueue(PanopticStatPlugin):
             rstats[nfq] = {}
             for k in self.stats[nfq].keys():
                 rstats[nfq][k] = float(self.stats[nfq][k]) - float(other.stats[nfq][k])
-        return PanopticNfqueue(rstats)
+        n = PanopticNfqueue()
+        n.set_stats(rstats)
+        return n

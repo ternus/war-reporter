@@ -1,22 +1,20 @@
 from base import PanopticStatPlugin
 
 class PanopticIFStats(PanopticStatPlugin):
-
     interface = 'eth0'
     diffable = True
 
     def __init__(self, *args, **kwargs):
-        if len(args):
-            self.stats = args[0]
         if 'interface' in kwargs:
             self.interface = kwargs['interface']
-
-        super(PanopticStatPlugin, self).__init__(*args, **kwargs)
+            del kwargs['interface']
+        self.kwargs = kwargs
+        return super(PanopticIFStats, self).__init__(*args, **kwargs)
 
     def sample(self):
         raw_dev_stats = open('/proc/net/dev', 'r').readlines()
         for line in raw_dev_stats:
-            if not line.count(interface): continue
+            if not line.count(self.interface): continue
             r = line.split()
             self.stats = {'pkt_in': r[2],
                 'pkt_out': r[10],

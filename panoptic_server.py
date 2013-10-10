@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys, time, json
+import sys, time, json, pprint
 import BaseHTTPServer
 HOST_NAME='localhost'
 PORT_NUMBER=9000
@@ -31,7 +31,8 @@ class CollectorHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.end_headers()
 
         data = json.loads(self.data_string)
-        print r.table('stats').insert(data).run(con)
+        pprint.pprint(data)
+        #print r.table('stats').insert(data).run(con)
         return
 
 if __name__ == '__main__':
