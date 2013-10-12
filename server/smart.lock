@@ -1,0 +1,26 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "http-publish": {},
+      "flot": {}
+    },
+    "packages": {
+      "http-publish": {
+        "git": "https://github.com/raix/Meteor-http-publish.git",
+        "tag": "v0.0.3",
+        "commit": "87c68f902f62620de396ea39c804a7ad9d13df4b"
+      },
+      "flot": {
+        "git": "https://github.com/austinrivas/meteor-flot.git",
+        "tag": "v1.0.6",
+        "commit": "b1561652ac7a73a99397a9922d39a5e19a75d26e"
+      },
+      "http-methods": {
+        "git": "https://github.com/raix/Meteor-http-methods.git",
+        "branch": "master",
+        "commit": "8b64503b6013bc79daf0c285ea3548f15caeaa0c"
+      }
+    }
+  }
+}

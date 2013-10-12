@@ -1,0 +1,17 @@
+<head>
+  <title>Panoptic</title>
+</head>
+
+<body>
+  {{> datapoints}}
+
+  <div id="flot_chart" style="width: 300px; height: 300px; border: 1px solid black"> </div>
+</body>
+
+<template name="datapoints">
+  Latest datapoint received from {{ latest.hostname }} at {{ latest.time }}
+</template>
+
+<template name="datapoint">
+  
+</template>
