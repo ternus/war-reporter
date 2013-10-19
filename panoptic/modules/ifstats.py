@@ -25,4 +25,3 @@ class PanopticIFStats(PanopticStatPlugin):
                 'bandwidth_in': r[1],
                 'bandwidth_out': r[9]
                 }
-
