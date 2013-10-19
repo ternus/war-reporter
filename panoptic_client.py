@@ -13,6 +13,7 @@ from panoptic.modules.base import PanopticStatPlugin
 def submit_stats(stats, url):
     req = urllib2.Request(url)
     req.add_header('Content-Type', 'application/json')
+    print "submitting..."
     return urllib2.urlopen(req, serialize(stats))
 
 def collect(plugins, kwargs):
@@ -21,15 +22,16 @@ def collect(plugins, kwargs):
         p = plugin(**kwargs)
         p.sample()
         stats[plugin] = p
-    stats['time'] = time.time()
-    stats['hostname'] = open('/etc/hostname').read().strip()
     return stats
 
 def serialize(stats):
     json_stats = {}
+    json_stats['time'] = time.time()
+    json_stats['hostname'] = open('/etc/hostname').read().strip()
+
     for s in stats:
         if inspect.isclass(s):
-            json_stats[s.__name__] = stats[s].as_json()
+            json_stats[s.__name__] = stats[s].stats
     return json.dumps(json_stats)
 
 def collect_and_submit(stats, kwargs):
