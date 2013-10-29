@@ -21,7 +21,7 @@ def collect(plugins, kwargs):
     for plugin in plugins:
         p = plugin(**kwargs)
         p.sample()
-        stats[plugin.replace('Panoptic', '')] = p
+        stats[plugin] = p
     return stats
 
 def serialize(stats):
@@ -31,7 +31,7 @@ def serialize(stats):
 
     for s in stats:
         if inspect.isclass(s):
-            json_stats[s.__name__] = stats[s].stats
+            json_stats[s.__name__.replace('Panoptic','')] = stats[s].stats
     return json.dumps(json_stats)
 
 def collect_and_submit(stats, kwargs):
