@@ -21,7 +21,7 @@ def collect(plugins, kwargs):
     for plugin in plugins:
         p = plugin(**kwargs)
         p.sample()
-        stats[plugin] = p
+        stats[plugin.replace('Panoptic', '')] = p
     return stats
 
 def serialize(stats):
