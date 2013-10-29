@@ -28,10 +28,12 @@ def serialize(stats):
     json_stats = {}
     json_stats['time'] = time.time()
     json_stats['hostname'] = open('/etc/hostname').read().strip()
-
+    json_stats['plugins'] = []
     for s in stats:
         if inspect.isclass(s):
-            json_stats[s.__name__.replace('Panoptic','')] = stats[s].stats
+            pname = s.__name__.replace('Panoptic','')
+            json_stats[pname] = stats[s].stats
+            json_stats['plugins'].append(pname)
     return json.dumps(json_stats)
 
 def collect_and_submit(stats, kwargs):
