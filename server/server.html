@@ -5,13 +5,43 @@
 <body>
   {{> datapoints}}
 
-  <div id="flot_chart" style="width: 300px; height: 300px; border: 1px solid black"> </div>
+  {{> charts}}
+
 </body>
 
 <template name="datapoints">
   Latest datapoint received from {{ latest.hostname }} at {{ latest.time }}
 </template>
 
-<template name="datapoint">
-  
+<template name="charts">
+  <div id="charts">
+    {{#each hosts}}
+    {{> hostchart}}
+    {{/each}}
+  </div>
 </template>
+
+<template name="hostchart">
+  <h2>{{ hostname }}</h2>
+  <span>Active Plugins: {{plugins}}</span>
+  <div class="host-charts" id="host-{{hostname}}">
+    {{#each plugins}}
+    <div class="plugin">
+    
+      <h4>{{this}}</h4>
+      {{#each datapoints ../hostname this}}
+      {{#if isNumeric ../../hostname ../this this}}
+      <h5>{{../this}}</h5>
+      <div class="datagraph" id="dpt_{{../../../hostname}}_{{../../this}}_{{../this}}" style="width`: 600px; height: 200px; border=1px solid grey;">    
+      {{plotData ../../../hostname ../../this ../this}}
+      </div>
+      {{/if}}
+      {{/each}}
+    </div>
+    {{/each}}
+  </div>
+</template>
+
+
+
+
